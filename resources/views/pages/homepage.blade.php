@@ -1,15 +1,25 @@
-@extends('layouts.app')
+@extends('template.index')
 
 @section('main')
-	<div id="homepage">
-		<h2>Homepage</h2>
-		<p>Selamat Datang</p>
-		<p>Selamat Belajar Laravel</p>
-	</div>
+<div class="container-fluid">
+  <!-- Breadcrumbs-->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="#">Home</a>
+    </li>
+    <li class="breadcrumb-item active">Home</li>
+  </ol>
+  <!-- Example DataTables Card-->
+  <div class="card mb-3">
+    <div class="card-header">
+      <i class="fa fa-file"></i> Home</div>
+    <div class="card-body">
+      <h1>Halaman Home</h1>
+    </div>
+  </div>
+</div>
 @stop
 
 @section('footer')
-	<div id="footer">
-		<p>&copy; 2021 Diklat Laravel</p>
-	</div>
+  @include('template.footer')
 @stop

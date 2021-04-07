@@ -12,22 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('pegawai.index');
+    return view('pages.homepage');
 });
 
 Route::get('about', function () {
 	return view('about');
-
 });
 
-Route::get('student/{id}/{name}', function ($id, $name) {
-	return 'Saya siswa dengan id '.$id.' dan nama '.$name;
+Route::get('siswa', function () {
+	$siswa = ['Budi', 'Fulan', 'Tini', 'Fulanah'];
+	$jmlSiswa = count($siswa);
+	return view('siswa.index', compact('siswa', 'jmlSiswa'));
 });
 
-Route::get('master/halaman-pegawai', function () {
-	return 'Halaman Pegawai';
-})->name('employee');
-
-Route::get('emp', function(){
-	return redirect()->route('employee');
-});
