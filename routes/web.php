@@ -19,9 +19,8 @@ Route::get('about', function () {
 	return view('about');
 });
 
-Route::get('siswa', function () {
-	$siswa = ['Budi', 'Fulan', 'Tini', 'Fulanah'];
-	$jmlSiswa = count($siswa);
-	return view('siswa.index', compact('siswa', 'jmlSiswa'));
-});
+Route::get('siswa', 'Siswa\SiswaController@index');
+Route::get('siswa/create', 'Siswa\SiswaController@create');
+Route::post('siswa', 'Siswa\SiswaController@store');
+Route::get('siswa/{siswa}', 'Siswa\SiswaController@show');
 
