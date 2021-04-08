@@ -19,10 +19,4 @@ Route::get('about', function () {
 	return view('about');
 });
 
-Route::get('siswa', 'Siswa\SiswaController@index');
-Route::get('siswa/create', 'Siswa\SiswaController@create');
-Route::post('siswa', 'Siswa\SiswaController@store');
-Route::delete('siswa/{siswa}','Siswa\SiswaController@destroy');
-Route::get('siswa/{siswa}', 'Siswa\SiswaController@show');
-Route::patch('siswa/{siswa}', 'Siswa\SiswaController@update');
-Route::get('siswa/{siswa}/edit', 'Siswa\SiswaController@edit');
+Route::resource('siswa','Siswa\SiswaController');
