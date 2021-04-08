@@ -37,6 +37,7 @@
           </form>          
         </div>
     </div>
+
     <div class="card-body">
       @if(!empty($siswa_list))
       <div class="table-responsive">
@@ -68,7 +69,9 @@
                           <button type="button" class="btn btn-circle btn-success">Edit</button>
                       </a>
                       {{ csrf_field() }}
-                      <button type="submit" name="_method" value="delete" class="btn btn-circle btn-danger">Delete</button>
+                      <button type="submit" name="_method" value="delete" 
+                        onClick="return confirm('are you sure you want to delete??');"
+                        class="btn btn-circle btn-danger">Delete</button>
                     </form>
                     
                   </td>
