@@ -43,9 +43,17 @@
                   <td>{{ $anak->tanggal_lahir }}</td>
                   <td>{{ $anak->jenis_kelamin }}</td>
                   <td>
-                    <a href="{{ url('siswa/'.$anak->id) }}"> 
+                    <form method="post" action="{{ url('siswa/'.$anak->id) }}">
+                      <a href="{{ url('siswa/'.$anak->id) }}"> 
                         <button type="button" class="btn btn-circle btn-primary">Detail</button>
-                    </a>
+                      </a>
+                      <a href="{{ url('siswa/'.$anak->id.'/edit') }}"> 
+                          <button type="button" class="btn btn-circle btn-success">Edit</button>
+                      </a>
+                      {{ csrf_field() }}
+                      <button type="submit" name="_method" value="delete" class="btn btn-circle btn-danger">Delete</button>
+                    </form>
+                    
                   </td>
                 </tr>
                 @endforeach
