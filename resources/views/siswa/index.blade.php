@@ -70,7 +70,7 @@
                       </a>
                       {{ csrf_field() }}
                       <button type="submit" name="_method" value="delete" 
-                        onClick="return confirm('are you sure you want to delete??');"
+                        onClick="return confirm('Anda yakin data akan dihapus');"
                         class="btn btn-circle btn-danger">Delete</button>
                     </form>
                     
