@@ -20,3 +20,4 @@ Route::get('about', function () {
 });
 
 Route::resource('siswa','Siswa\SiswaController');
+Route::post('siswa/cari', 'Siswa\SiswaController@cari');

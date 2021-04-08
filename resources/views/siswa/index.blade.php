@@ -5,7 +5,7 @@
   <!-- Breadcrumbs-->
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
-      <a href="#">Siswa</a>
+      <a href="{{ url('siswa') }}">Siswa</a>
     </li>
     <li class="breadcrumb-item active">Data Siswa</li>
   </ol>
@@ -19,7 +19,24 @@
         </a>
     </div>
 
-    
+    <div class="card-body">
+        <div class="table-responsive">
+          <form method="post" action="{{ url('siswa/cari') }}">
+            {{ csrf_field() }}
+              <div class="form-group col-md-4">
+                  <label class="control-label">Jenis Kelamin :</label>
+                  <select class="form-control select2" select2="" name="jenis_kelamin">
+                    <option value="">Select ...</option>
+                    <option value="L"> Laki Laki</option>
+                    <option value="P"> Perempuan</option>
+                  </select>
+              </div>
+              <div class="form-group col-md-4">
+                <button type="submit" class="btn btn-circle btn-primary">Cari</button>
+              </div>
+          </form>          
+        </div>
+    </div>
     <div class="card-body">
       @if(!empty($siswa_list))
       <div class="table-responsive">
@@ -40,7 +57,7 @@
                   <td>{{ $anak->nisn }}</td>
                   <td>{{ $anak->nama }}</td>
                   <td>{{ $anak->tempat_lahir }}</td>
-                  <td>{{ $anak->tanggal_lahir }}</td>
+                  <td>{{ $anak->tanggal_lahir->format('d-m-Y') }}</td>
                   <td>{{ $anak->jenis_kelamin }}</td>
                   <td>
                     <form method="post" action="{{ url('siswa/'.$anak->id) }}">

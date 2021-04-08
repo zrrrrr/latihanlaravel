@@ -30,7 +30,7 @@
             </div>
             <div class="form-group col-md-12">
                 <label class="control-label">Tanggal Lahir :</label>
-                <input type="text" name="tanggal_lahir" class="form-control" style="text-transform: uppercase" placeholder="Tanggal Lahir">
+                <input type="date" name="tanggal_lahir" class="form-control" style="text-transform: uppercase" placeholder="Tanggal Lahir">
             </div>
             <div class="form-group col-md-12">
                 <label class="control-label">Jenis Kelamin :</label>

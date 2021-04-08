@@ -91,4 +91,12 @@ class SiswaController extends Controller
         Siswa::whereId($id)->delete();
         return redirect('siswa');
     }
+
+    public function cari(Request $request) {
+        $data = $request->all();
+
+        $siswa_list = Siswa::where('jenis_kelamin', '=', $data['jenis_kelamin'])->get();
+        $jumlah_siswa = $siswa_list->count();
+        return view('siswa.index', compact('siswa_list', 'jumlah_siswa'));
+    }
 }
