@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Siswa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Siswa;
+use Carbon\Carbon;
+use App\Http\Requests\SiswaRequest;
 
 class SiswaController extends Controller
 {
@@ -36,8 +38,10 @@ class SiswaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SiswaRequest $request)
     {
+        $input = $request->all();
+        //perintah utk menyimpan ke database
         Siswa::create($request->all());
         return redirect('siswa');
     }
@@ -63,7 +67,8 @@ class SiswaController extends Controller
     public function edit($id)
     {
         $siswa = Siswa::findOrFail($id);
-        return view('siswa.edit', compact('siswa'));
+        $tglLahir = date('Y-m-d', strtotime($siswa->tanggal_lahir));
+        return view('siswa.edit', compact('siswa','tglLahir'));
     }
 
     /**
@@ -73,7 +78,7 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SiswaRequest $request, $id)
     {
         $siswa = Siswa::findOrFail($id);
         $siswa->update($request->all());
