@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Siswa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Siswa;
+use App\Model\Telepon;
 use Carbon\Carbon;
 use App\Http\Requests\SiswaRequest;
 
@@ -41,8 +42,14 @@ class SiswaController extends Controller
     public function store(SiswaRequest $request)
     {
         $input = $request->all();
-        //perintah utk menyimpan ke database
-        Siswa::create($request->all());
+        //perintah utk menyimpan ke table siswa
+        $siswa = Siswa::create($request->all());
+
+        //perintah utk menyimpan ke table telepon
+        $telepon = new Telepon;
+        $telepon->no_telepon = $request->input('no_telepon');
+        $siswa->telepon()->save($telepon);
+
         return redirect('siswa');
     }
 
@@ -55,6 +62,7 @@ class SiswaController extends Controller
     public function show($id)
     {
         $siswa = Siswa::findOrFail($id);
+        $siswa->no_telepon = !empty($siswa->telepon->no_telepon) ? $siswa->telepon->no_telepon : '-';
         return  view('siswa.show', compact('siswa'));
     }
 
@@ -67,6 +75,7 @@ class SiswaController extends Controller
     public function edit($id)
     {
         $siswa = Siswa::findOrFail($id);
+        $siswa->no_telepon = !empty($siswa->telepon->no_telepon) ? $siswa->telepon->no_telepon : '-';
         $tglLahir = date('Y-m-d', strtotime($siswa->tanggal_lahir));
         return view('siswa.edit', compact('siswa','tglLahir'));
     }
@@ -81,7 +90,12 @@ class SiswaController extends Controller
     public function update(SiswaRequest $request, $id)
     {
         $siswa = Siswa::findOrFail($id);
-        $siswa->update($request->all());
+        // $siswa->update($request->all());
+
+        $telepon = $siswa->telepon;
+        $telepon->no_telepon = $request->input('no_telepon');
+        $siswa->telepon()->save($telepon);
+
         return redirect('siswa');
     }
 

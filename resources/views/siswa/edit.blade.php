@@ -65,6 +65,13 @@
                   <span style="color:red">{{ $errors->first('jenis_kelamin') }}</span>
                 @endif
             </div>
+             <div class="form-group col-md-12">
+                <label class="control-label">No Telephone :</label>
+                <input type="text" name="no_telepon" class="form-control" style="text-transform: uppercase" value="{{ $siswa->no_telepon }}">
+                @if($errors->has('no_telepon'))
+                  <span style="color:red">{{ $errors->first('no_telepon') }}</span>
+                @endif
+            </div>
             <div class="form-group col-md-12">
                 <button type="submit" class="btn btn-primary btn-circle"> Simpan </button>
             </div>

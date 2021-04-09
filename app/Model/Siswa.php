@@ -14,11 +14,7 @@ class Siswa extends Model
 
     protected $dates = ['tanggal_lahir'];
     
-    // public function getNamaAtrribute($nama) {
-    // 	return ucwords($nama);
-    // }
-
-    // public function setNamaAtrribute($value) {
-    // 	this->attributes['nama'] = strtolower($value);
-    // }
+    public function telepon() {
+        return $this->hasOne('App\Model\Telepon', 'id_siswa');
+    }
 }
