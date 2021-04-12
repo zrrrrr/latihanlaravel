@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Siswa;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use App\Http\Requests\SiswaRequest;
+use Illuminate\Support\Facades\DB;
 
 use App\Model\Siswa;
 use App\Model\Telepon;
@@ -22,7 +23,18 @@ class SiswaController extends Controller
     public function index()
     {
         $siswa_list = Siswa::all();
+        // $listHobi = [];
+        // $flag = 0;
+        // foreach ($siswa_list as $value) {
+        //     $hobi = DB::table('v_hobi_siswa')->select('nama_hobi')->where('id',$value['id'])->get()->toArray();
+        //     foreach ($hobi as $key => $valueHobi) {
+        //         $flag=$key;
+        //         if($key)
+        //     }
+        // }
         $jumlah_siswa = $siswa_list->count();
+        
+
         return view('siswa.index', compact('siswa_list', 'jumlah_siswa'));
     }
 
@@ -47,6 +59,7 @@ class SiswaController extends Controller
      */
     public function store(SiswaRequest $request)
     {
+        
         $input = $request->all();
         //perintah utk menyimpan ke table siswa
         $siswa = Siswa::create($request->all());

@@ -11,13 +11,27 @@
 |
 */
 
-Route::get('/', function () {
-    return view('pages.homepage');
+
+
+
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::group(['middleware' =>['auth']], function(){
+	Route::get('about', function () {
+		return view('about');
+	});
+
+	Route::get('/', function () {
+		return view('pages.homepage');
+	});
+		
+	Route::resource('/siswa','Siswa\SiswaController');
+	Route::post('siswa/cari', 'Siswa\SiswaController@cari');
 });
 
-Route::get('about', function () {
-	return view('about');
+Auth::routes();
+Route::get('logout', 'Auth\LoginController@logout', function () {
+    return abort(404);
 });
-
-Route::resource('siswa','Siswa\SiswaController');
-Route::post('siswa/cari', 'Siswa\SiswaController@cari');
