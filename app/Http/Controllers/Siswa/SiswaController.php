@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Siswa;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use App\Http\Requests\SiswaRequest;
+
 use App\Model\Siswa;
 use App\Model\Telepon;
 use App\Model\Kelas;
-use Carbon\Carbon;
-use App\Http\Requests\SiswaRequest;
+use App\Model\Hobi;
 
 class SiswaController extends Controller
 {
@@ -32,7 +34,9 @@ class SiswaController extends Controller
     public function create()
     {
         $list_kelas = Kelas::all();
-        return view('siswa.create', compact('list_kelas'));
+        $list_hobi = Hobi::all();
+        
+        return view('siswa.create', compact('list_kelas', 'list_hobi'));
     }
 
     /**
@@ -51,6 +55,9 @@ class SiswaController extends Controller
         $telepon = new Telepon;
         $telepon->no_telepon = $request->input('no_telepon');
         $siswa->telepon()->save($telepon);
+        
+        //perintah utk menyimpak ke table hobi_siswa
+        $siswa->hobi()->attach($request->input('hobi'));
 
         return redirect('siswa');
     }
@@ -65,7 +72,8 @@ class SiswaController extends Controller
     {
         $siswa = Siswa::findOrFail($id);
         $siswa->no_telepon = !empty($siswa->telepon->no_telepon) ? $siswa->telepon->no_telepon : '-';
-        return  view('siswa.show', compact('siswa'));
+        $list_hobi = Hobi::all();
+        return  view('siswa.show', compact('siswa','list_hobi'));
     }
 
     /**
@@ -80,7 +88,8 @@ class SiswaController extends Controller
         $list_kelas = Kelas::all();
         $siswa->no_telepon = !empty($siswa->telepon->no_telepon) ? $siswa->telepon->no_telepon : '-';
         $tglLahir = date('Y-m-d', strtotime($siswa->tanggal_lahir));
-        return view('siswa.edit', compact('siswa','tglLahir', 'list_kelas'));
+        $list_hobi = Hobi::all();
+        return view('siswa.edit', compact('siswa','tglLahir', 'list_kelas', 'list_hobi'));
     }
 
     /**
@@ -98,6 +107,10 @@ class SiswaController extends Controller
         $telepon = $siswa->telepon;
         $telepon->no_telepon = $request->input('no_telepon');
         $siswa->telepon()->save($telepon);
+
+        if(!is_null($request->input('hobi'))) {
+            $siswa->hobi()->sync($request->input('hobi'));
+        }
 
         return redirect('siswa');
     }

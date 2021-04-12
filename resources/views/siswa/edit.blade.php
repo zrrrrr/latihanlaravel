@@ -86,6 +86,35 @@
                 @endif
             </div>
             <div class="form-group col-md-12">
+                <label class="control-label">Pilih Hobi :</label> <br/>
+                @foreach($list_hobi as $lh)
+                  @php
+                    $i = 'true';
+                  @endphp
+                  @foreach($siswa->hobi as $h)
+                    @if($lh->id == $h->id)
+                      <label>
+                        <input type="checkbox" name="hobi[]" value="{{ $lh->id }}" checked> {{ $lh->nama_hobi }}
+                      </label> <br/>
+                      @php
+                        $i='false';
+                      @endphp
+                      @break;
+                    @endif
+                  @endforeach
+                  
+                  @if($i=='true')
+                    <label>
+                      <input type="checkbox" name="hobi[]" value="{{ $lh->id }}"> {{ $lh->nama_hobi }}
+                    </label> <br/>
+                  @endif
+                @endforeach
+                
+                @if($errors->has('hobi'))
+                  <span style="color:red"> {{ $errors->first('hobi') }} </span>
+                @endif
+            </div>
+            <div class="form-group col-md-12">
                 <button type="submit" class="btn btn-primary btn-circle"> Simpan </button>
             </div>
           </form>

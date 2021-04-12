@@ -76,6 +76,18 @@
                 @endif
             </div>
             <div class="form-group col-md-12">
+                <label class="control-label">Pilih Hobi :</label> <br/>
+                @foreach($list_hobi as $h)
+                  <label>
+                    <input type="checkbox" name="hobi[]" value="{{ $h->id }}"> {{ $h->nama_hobi }}
+                  </label> <br/>
+                @endforeach
+                
+                @if($errors->has('hobi'))
+                  <span style="color:red"> {{ $errors->first('hobi') }} </span>
+                @endif
+            </div>
+            <div class="form-group col-md-12">
                 <button type="submit" class="btn btn-primary btn-circle"> Simpan </button>
             </div>
           </form>
