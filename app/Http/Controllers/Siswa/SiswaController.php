@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Siswa;
 use App\Model\Telepon;
+use App\Model\Kelas;
 use Carbon\Carbon;
 use App\Http\Requests\SiswaRequest;
 
@@ -30,7 +31,8 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        return view('siswa.create');
+        $list_kelas = Kelas::all();
+        return view('siswa.create', compact('list_kelas'));
     }
 
     /**
@@ -75,9 +77,10 @@ class SiswaController extends Controller
     public function edit($id)
     {
         $siswa = Siswa::findOrFail($id);
+        $list_kelas = Kelas::all();
         $siswa->no_telepon = !empty($siswa->telepon->no_telepon) ? $siswa->telepon->no_telepon : '-';
         $tglLahir = date('Y-m-d', strtotime($siswa->tanggal_lahir));
-        return view('siswa.edit', compact('siswa','tglLahir'));
+        return view('siswa.edit', compact('siswa','tglLahir', 'list_kelas'));
     }
 
     /**
@@ -90,7 +93,7 @@ class SiswaController extends Controller
     public function update(SiswaRequest $request, $id)
     {
         $siswa = Siswa::findOrFail($id);
-        // $siswa->update($request->all());
+        $siswa->update($request->all());
 
         $telepon = $siswa->telepon;
         $telepon->no_telepon = $request->input('no_telepon');

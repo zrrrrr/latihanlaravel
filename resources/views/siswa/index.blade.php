@@ -50,6 +50,7 @@
                   <th>Tanggal Lahir</th>
                   <th>Jenis Kelamin</th>
                   <th>No Telephone</th>
+                  <th>Kelas</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -62,6 +63,7 @@
                   <td>{{ $anak->tanggal_lahir->format('d-m-Y') }}</td>
                   <td>{{ $anak->jenis_kelamin }}</td>
                   <td>{{ !empty($anak->telepon->no_telepon) ? $anak->telepon->no_telepon : '-' }}</td>
+                  <td>{{ $anak->kelas->nama_kelas }}</td>
                   <td>
                     <form method="post" action="{{ url('siswa/'.$anak->id) }}">
                       <a href="{{ url('siswa/'.$anak->id) }}"> 
@@ -75,7 +77,6 @@
                         onClick="return confirm('Anda yakin data akan dihapus');"
                         class="btn btn-circle btn-danger">Delete</button>
                     </form>
-                    
                   </td>
                 </tr>
                 @endforeach

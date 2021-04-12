@@ -63,6 +63,19 @@
                 @endif
             </div>
             <div class="form-group col-md-12">
+                <label class="control-label">Pilih Kelas :</label>
+                <select class="form-control select2" select2="" name="id_kelas">
+                  <option value="">Select ...</option>
+                  @foreach($list_kelas as $rs)
+                    <option value="{{ $rs->id }}">{{ $rs->nama_kelas }}</option>
+                  @endforeach
+                </select>
+                
+                @if($errors->has('id_kelas'))
+                  <span style="color:red"> {{ $errors->first('id_kelas') }} </span>
+                @endif
+            </div>
+            <div class="form-group col-md-12">
                 <button type="submit" class="btn btn-primary btn-circle"> Simpan </button>
             </div>
           </form>
